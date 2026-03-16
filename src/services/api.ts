@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 import type {
   CropPrice,
   Crop,
@@ -7,29 +7,30 @@ import type {
   TrendPoint,
 } from "../types";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-
-const api = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
-  headers: { "Content-Type": "application/json" },
-});
+const API = import.meta.env.VITE_API_URL;
 
 export const farmerApi = {
-  getPrices: () => api.get<CropPrice[]>("/public/farmerDashboard"),
+  getPrices: () => axiosInstance.get<CropPrice[]>("/public/farmerDashboard"),
 };
 
 export const cropApi = {
-  getAll: () => api.get<Crop[]>("/public/allCrops"),
+  getAll: () => axiosInstance.get<Crop[]>("/public/allCrops"),
 };
 
 export const adminApi = {
-  savePrice: (payload: SavePricePayload) => api.post("/admin/prices", payload),
+  savePrice: (payload: SavePricePayload) =>
+    axiosInstance.post("/admin/prices", payload),
 };
 
 export const trendApi = {
   getTrend: (cropId: number, type: TrendType) =>
-    api.get<TrendPoint[]>(`/public/prices/trend`, { params: { cropId, type } }),
+    axiosInstance.get<TrendPoint[]>(`/public/prices/trend`, {
+      params: { cropId, type },
+    }),
 };
 
-export default api;
+export const auth = {
+  login: (credentials: any) => axiosInstance.post(`/auth/login`, credentials),
+  refresh: (token: any) =>
+    axiosInstance.post(`/auth/refresh`, { refreshToken: token }),
+};

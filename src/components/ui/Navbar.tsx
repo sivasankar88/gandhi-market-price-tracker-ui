@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const { pathname } = useLocation();
-
+  const token = localStorage.getItem("accessToken");
   return (
     <header className="bg-earth-700 text-white sticky top-0 z-50 shadow-lg">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -12,26 +12,28 @@ export default function Navbar() {
             காந்தி சந்தை
           </span>
         </div>
-        <nav className="flex gap-2">
-          <Link
-            to="/"
-            className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-              pathname === "/"
-                ? "bg-earth-500 text-white"
-                : "text-earth-200 hover:bg-earth-600 hover:text-white"
-            }`}>
-            🌾 Prices
-          </Link>
-          <Link
-            to="/admin"
-            className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-              pathname === "/admin"
-                ? "bg-earth-500 text-white"
-                : "text-earth-200 hover:bg-earth-600 hover:text-white"
-            }`}>
-            ⚙️ Admin
-          </Link>
-        </nav>
+        {token && (
+          <nav className="flex gap-2">
+            <Link
+              to="/"
+              className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                pathname === "/"
+                  ? "bg-earth-500 text-white"
+                  : "text-earth-200 hover:bg-earth-600 hover:text-white"
+              }`}>
+              🌾 Prices
+            </Link>
+            <Link
+              to="/admin/dashboard"
+              className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                pathname === "/admin/dashboard"
+                  ? "bg-earth-500 text-white"
+                  : "text-earth-200 hover:bg-earth-600 hover:text-white"
+              }`}>
+              ⚙️ Admin
+            </Link>
+          </nav>
+        )}
       </div>
     </header>
   );

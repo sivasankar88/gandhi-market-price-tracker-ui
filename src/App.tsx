@@ -4,6 +4,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Navbar from "./components/ui/Navbar";
 import ToastProvider from "./components/ui/ToastProvider";
 import TrendAnalysis from "./pages/TrendAnalysis";
+import AdminLogin from "./pages/AdminLogin";
+import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -13,8 +16,17 @@ export default function App() {
         <main className="pb-10">
           <Routes>
             <Route path="/" element={<FarmerDashboard />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/trend/:cropId" element={<TrendAnalysis />} />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>
