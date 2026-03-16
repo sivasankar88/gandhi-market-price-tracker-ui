@@ -7,8 +7,6 @@ import type {
   TrendPoint,
 } from "../types";
 
-const API = import.meta.env.VITE_API_URL;
-
 export const farmerApi = {
   getPrices: () => axiosInstance.get<CropPrice[]>("/public/farmerDashboard"),
 };
