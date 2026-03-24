@@ -12,12 +12,14 @@ export const farmerApi = {
 };
 
 export const cropApi = {
-  getAll: () => axiosInstance.get<Crop[]>("/public/allCrops"),
+  getAll: () => axiosInstance.get<Crop[]>("/admin/getCropsWithPrices"),
 };
 
 export const adminApi = {
   savePrice: (payload: SavePricePayload) =>
     axiosInstance.post("/admin/prices", payload),
+  saveCrop: (payload: { name: string; tamilName: string }) =>
+    axiosInstance.post("/admin/addCrop", payload),
 };
 
 export const trendApi = {

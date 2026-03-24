@@ -15,6 +15,8 @@ export interface Crop {
   id: number;
   name: string;
   tamilName: string;
+  minPrice: string;
+  maxPrice: string;
 }
 
 export interface SavePricePayload {
