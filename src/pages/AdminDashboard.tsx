@@ -18,7 +18,6 @@ export default function AdminDashboard() {
   });
   const [savingCrop, setSavingCrop] = useState(false);
   useEffect(() => {
-    console.log("rendered");
     initialUpdate();
   }, [crops]);
 
@@ -41,7 +40,6 @@ export default function AdminDashboard() {
         maxPrice: item.maxPrice,
       };
     });
-    console.log(inputValue);
     setInputs(inputValue);
   };
 

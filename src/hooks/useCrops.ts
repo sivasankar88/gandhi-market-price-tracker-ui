@@ -14,8 +14,10 @@ export default function useCrops(): UseCropsReturn {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const fetchCrops = useCallback(async (): Promise<void> => {
-    setLoading(true);
-    setError(null);
+    if (crops.length == 0) {
+      setLoading(true);
+      setError(null);
+    }
     try {
       const { data } = await cropApi.getAll();
       setCrops(data);
